@@ -7,6 +7,9 @@
             <v-col cols="12" xs="8" sm="8" md="8" lg="8" xl="8">
               <v-card-title class="text-h5" v-text="good.title"></v-card-title>
               <v-card-subtitle v-text="good.subtitle"></v-card-subtitle>
+              <v-card-subtitle
+                >Averange price: {{ good.price }}</v-card-subtitle
+              >
             </v-col>
             <v-col cols="12" xs="0" sm="4" md="4" lg="4" xl="4">
               <v-avatar class="ma-3" flex size="150" tile>
@@ -65,7 +68,7 @@
 </template>
 
 <script>
-import { uuid } from 'vue-uuid'
+// import { uuid } from 'vue-uuid'
 export default {
   props: {
     goodprop: {
@@ -79,6 +82,12 @@ export default {
 
   created() {
     this.good = JSON.parse(JSON.stringify(this.goodprop))
+    const ind = this.$store.getters['cart/getCartIndexById'](this.good.id)
+    if (ind !== -1) {
+      this.good.count = this.$store.state.cart.list[ind].count
+    } else {
+      this.good.count = 0
+    }
   },
   methods: {
     plusCount() {
@@ -86,27 +95,35 @@ export default {
         this.good.count++
         // console.log(this.good)
         const ngood = {
-          id: uuid.v4(),
-          name: this.good.title,
+          id: this.good.id,
+          title: this.good.title,
+          subtitle: this.good.subtitle,
+          src: this.good.src,
           count: this.good.count,
-          cost: this.good.price,
-          summ: this.good.count * this.good.cost,
+          price: this.good.price,
+          summ: this.good.count * this.good.price,
         }
         this.$store.dispatch('cart/plusToCart', ngood)
       } else {
         this.good.count++
+        const ind = this.$store.getters['cart/getCartIndexById'](this.good.id)
+        console.log(ind)
+        if (ind !== -1) {
+          this.$store.dispatch('cart/plusCountToCart', ind)
+        } else {
+          console.log('poshlo netak')
+        }
       }
     },
     minusCount() {
-      this.good.count--
-      const ngood = {
-        id: uuid.v4(),
-        name: this.good.title,
-        count: this.good.count,
-        cost: this.good.price,
-        summ: this.good.count * this.good.cost,
+      if (this.good.count === 1) {
+        const ngood = JSON.parse(JSON.stringify(this.good))
+        this.$store.dispatch('cart/minusFromCart', ngood)
+      } else {
+        const ind = this.$store.getters['cart/getCartIndexById'](this.good.id)
+        this.$store.dispatch('cart/minusCountToCart', ind)
       }
-      this.$store.dispatch('cart/minusToCart', ngood)
+      this.good.count--
     },
   },
 }

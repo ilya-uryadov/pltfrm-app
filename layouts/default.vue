@@ -66,9 +66,9 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
+      clipped: true,
+      drawer: true,
+      fixed: true,
       items: [
         {
           icon: 'mdi-chart-bubble',
@@ -91,7 +91,7 @@ export default {
           to: '/cart',
         },
       ],
-      miniVariant: false,
+      miniVariant: true,
       right: true,
       rightDrawer: false,
       title: 'Platform for customers',

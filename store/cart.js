@@ -2,15 +2,15 @@ export const state = () => ({
   count: 5,
   cost: 2344,
   list: [
-    {
-      id: 8,
-      name: 'Номенклатура 1',
-      count: 12,
-      cost: 100,
-      summ: 1200,
-    },
-    { id: 9, name: 'Номенклатура 2', count: 10, cost: 100, summ: 1000 },
-    { id: 10, name: 'Номенклатура 3', count: 2, cost: 90, summ: 180 },
+    // {
+    //   id: 8,
+    //   title: 'Игристое ',
+    //   subtitle: 'Шампанское , производство Россия, Краснодарский край',
+    //   src: 'https://bereg-cafe.ru/wp-content/uploads/Abrau-Dyurso-bryut-beloe.png',
+    //   count: 12,
+    //   price: 100,
+    //   summ: 1200,
+    // },
   ],
 })
 
@@ -28,11 +28,11 @@ export const mutations = {
 
   plusGoodInCart(state, ind) {
     state.list[ind].count++
-    state.list[ind].summ = state.list[ind].cost * state.list[ind].count
+    state.list[ind].summ = state.list[ind].price * state.list[ind].count
   },
   minusGoodInCart(state, ind) {
     state.list[ind].count--
-    state.list[ind].summ = state.list[ind].cost * state.list[ind].count
+    state.list[ind].summ = state.list[ind].price * state.list[ind].count
   },
 }
 
@@ -53,10 +53,16 @@ export const actions = {
 
 export const getters = {
   getCartInfo: (state) => {
+    const summ = state.list.length
     return {
       count: state.list.length,
-      cost: 2344,
+      cost: summ,
       list: state.list,
     }
   },
+  getCartIndexById:
+    (state) =>
+    (id = 0) => {
+      return state.list.findIndex((item) => item.id === id)
+    },
 }

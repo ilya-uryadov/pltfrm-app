@@ -26,6 +26,7 @@
       <cartcard :goodprop="item"></cartcard>
     </v-col>
 
+    
     <div>
       {{ cartInfo }}
     </div>

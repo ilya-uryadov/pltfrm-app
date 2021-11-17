@@ -130,9 +130,4 @@ export const getters = {
     (id = 0) => {
       return state.list.filter((el) => el.id === id)[0]
     },
-  getOrderIndexById:
-    (state) =>
-    (id = 0) => {
-      return state.cart.list.findIndex((item) => item.id === id)
-    },
 }
