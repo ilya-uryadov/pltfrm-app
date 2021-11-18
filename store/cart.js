@@ -1,17 +1,7 @@
 export const state = () => ({
-  count: 5,
-  cost: 2344,
-  list: [
-    // {
-    //   id: 8,
-    //   title: 'Игристое ',
-    //   subtitle: 'Шампанское , производство Россия, Краснодарский край',
-    //   src: 'https://bereg-cafe.ru/wp-content/uploads/Abrau-Dyurso-bryut-beloe.png',
-    //   count: 12,
-    //   price: 100,
-    //   summ: 1200,
-    // },
-  ],
+  // count: 5,
+  // cost: 2344,
+  list: [],
 })
 
 export const mutations = {
@@ -53,10 +43,13 @@ export const actions = {
 
 export const getters = {
   getCartInfo: (state) => {
-    const summ = state.list.length
+    let result = 0
+    state.list.forEach(function (num) {
+      result += num.summ
+    })
     return {
       count: state.list.length,
-      cost: summ,
+      cost: result,
       list: state.list,
     }
   },

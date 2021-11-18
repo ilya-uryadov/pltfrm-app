@@ -93,7 +93,7 @@ export default {
     plusCount() {
       if (!this.good.count) {
         this.good.count++
-        // console.log(this.good)
+
         const ngood = {
           id: this.good.id,
           title: this.good.title,
@@ -107,7 +107,7 @@ export default {
       } else {
         this.good.count++
         const ind = this.$store.getters['cart/getCartIndexById'](this.good.id)
-        console.log(ind)
+
         if (ind !== -1) {
           this.$store.dispatch('cart/plusCountToCart', ind)
         } else {
