@@ -11,10 +11,10 @@ export const mutations = {
   removeGoodfromCart(state, goodId) {
     state.list = state.list.filter((good) => good.id !== goodId)
   },
-  rewriteGoodtoCart(state, good) {
-    const ind = state.list.findIndex((item) => item.id === good.id)
-    state.list[ind] = good
-  },
+  // rewriteGoodtoCart(state, good) {
+  //   const ind = state.list.findIndex((item) => item.id === good.id)
+  //   state.list[ind] = good
+  // },
 
   plusGoodInCart(state, ind) {
     state.list[ind].count++

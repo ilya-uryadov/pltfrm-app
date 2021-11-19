@@ -8,6 +8,7 @@
         <ordercard :order="order"></ordercard>
       </v-col>
     </v-row>
+    <div>{{ ordersList }}</div>
   </v-container>
 </template>
 

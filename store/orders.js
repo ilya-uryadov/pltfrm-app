@@ -14,19 +14,19 @@ export const state = () => ({
         {
           name: 'Номенклатура 1',
           count: 12,
-          cost: 100,
+          price: 100,
           summ: 1200,
         },
         {
           name: 'Номенклатура 2',
           count: 10,
-          cost: 100,
+          price: 100,
           summ: 1000,
         },
         {
           name: 'Номенклатура 3',
           count: 2,
-          cost: 90,
+          price: 90,
           summ: 180,
         },
       ],
@@ -43,37 +43,37 @@ export const state = () => ({
         {
           name: 'Номенклатура 1',
           count: 12,
-          cost: 100,
+          price: 100,
           summ: 1200,
         },
         {
           name: 'Номенклатура 2',
           count: 10,
-          cost: 100,
+          price: 100,
           summ: 1000,
         },
         {
           name: 'Номенклатура 3',
           count: 2,
-          cost: 90,
+          price: 90,
           summ: 180,
         },
         {
           name: 'Номенклатура 4',
           count: 12,
-          cost: 100,
+          price: 100,
           summ: 1200,
         },
         {
           name: 'Номенклатура 5',
           count: 10,
-          cost: 100,
+          price: 100,
           summ: 1000,
         },
         {
           name: 'Номенклатура 6',
           count: 2,
-          cost: 90,
+          price: 90,
           summ: 180,
         },
       ],
@@ -91,34 +91,33 @@ export const state = () => ({
           id: 8,
           name: 'Номенклатура 1',
           count: 12,
-          cost: 100,
+          price: 100,
           summ: 1200,
         },
-        { id: 9, name: 'Номенклатура 2', count: 10, cost: 100, summ: 1000 },
-        { id: 10, name: 'Номенклатура 3', count: 2, cost: 90, summ: 180 },
+        { id: 9, name: 'Номенклатура 2', count: 10, price: 100, summ: 1000 },
+        { id: 10, name: 'Номенклатура 3', count: 2, price: 90, summ: 180 },
       ],
     },
   ],
-  cart: {
-    count: 5,
-    cost: 2344,
-    list: [
-      {
-        id: 8,
-        name: 'Номенклатура 1',
-        count: 12,
-        cost: 100,
-        summ: 1200,
-      },
-      { id: 9, name: 'Номенклатура 2', count: 10, cost: 100, summ: 1000 },
-      { id: 10, name: 'Номенклатура 3', count: 2, cost: 90, summ: 180 },
-    ],
-  },
 })
 
-export const mutations = {}
+export const mutations = {
+  addOrderToList(state, order) {
+    state.list.push(order)
+  },
+  removeOrderFromList(state, orderId) {
+    state.list = state.list.filter((order) => order.id !== orderId)
+  },
+}
 
-export const actions = {}
+export const actions = {
+  addNewOrderToList(context, order) {
+    context.commit('addOrderToList', order)
+  },
+  removeOrderFromList(context, orderID) {
+    context.commit('removeOrderFromList', orderID)
+  },
+}
 
 export const getters = {
   getOrders: (state) => {
@@ -129,5 +128,11 @@ export const getters = {
     (state) =>
     (id = 0) => {
       return state.list.filter((el) => el.id === id)[0]
+    },
+
+  getOrderIndexById:
+    (state) =>
+    (id = 0) => {
+      return state.list.findIndex((item) => item.id === id)
     },
 }
