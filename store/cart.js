@@ -24,6 +24,9 @@ export const mutations = {
     state.list[ind].count--
     state.list[ind].summ = state.list[ind].price * state.list[ind].count
   },
+  setEmptyCart(state) {
+    state.list = []
+  },
 }
 
 export const actions = {
@@ -38,6 +41,9 @@ export const actions = {
   },
   minusCountToCart(context, ind) {
     context.commit('minusGoodInCart', ind)
+  },
+  emptyCart(context) {
+    context.commit('setEmptyCart')
   },
 }
 

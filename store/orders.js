@@ -1,4 +1,5 @@
 // store/catalog.js
+import { v4 as uuidv4 } from 'uuid'
 
 export const state = () => ({
   list: [
@@ -12,19 +13,19 @@ export const state = () => ({
       total_cost: 2400,
       order_details: [
         {
-          name: 'Номенклатура 1',
+          title: 'Номенклатура 1',
           count: 12,
           price: 100,
           summ: 1200,
         },
         {
-          name: 'Номенклатура 2',
+          title: 'Номенклатура 2',
           count: 10,
           price: 100,
           summ: 1000,
         },
         {
-          name: 'Номенклатура 3',
+          title: 'Номенклатура 3',
           count: 2,
           price: 90,
           summ: 180,
@@ -41,37 +42,37 @@ export const state = () => ({
       total_cost: 3300,
       order_details: [
         {
-          name: 'Номенклатура 1',
+          title: 'Номенклатура 1',
           count: 12,
           price: 100,
           summ: 1200,
         },
         {
-          name: 'Номенклатура 2',
+          title: 'Номенклатура 2',
           count: 10,
           price: 100,
           summ: 1000,
         },
         {
-          name: 'Номенклатура 3',
+          title: 'Номенклатура 3',
           count: 2,
           price: 90,
           summ: 180,
         },
         {
-          name: 'Номенклатура 4',
+          title: 'Номенклатура 4',
           count: 12,
           price: 100,
           summ: 1200,
         },
         {
-          name: 'Номенклатура 5',
+          title: 'Номенклатура 5',
           count: 10,
           price: 100,
           summ: 1000,
         },
         {
-          name: 'Номенклатура 6',
+          title: 'Номенклатура 6',
           count: 2,
           price: 90,
           summ: 180,
@@ -89,13 +90,13 @@ export const state = () => ({
       order_details: [
         {
           id: 8,
-          name: 'Номенклатура 1',
+          title: 'Номенклатура 1',
           count: 12,
           price: 100,
           summ: 1200,
         },
-        { id: 9, name: 'Номенклатура 2', count: 10, price: 100, summ: 1000 },
-        { id: 10, name: 'Номенклатура 3', count: 2, price: 90, summ: 180 },
+        { id: 9, title: 'Номенклатура 2', count: 10, price: 100, summ: 1000 },
+        { id: 10, title: 'Номенклатура 3', count: 2, price: 90, summ: 180 },
       ],
     },
   ],
@@ -112,6 +113,20 @@ export const mutations = {
 
 export const actions = {
   addNewOrderToList(context, order) {
+    order.id = uuidv4()
+    const newDate = new Date()
+    const options = {
+      era: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      timezone: 'UTC',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    }
+    order.date = newDate.toLocaleDateString('ru', options)
     context.commit('addOrderToList', order)
   },
   removeOrderFromList(context, orderID) {

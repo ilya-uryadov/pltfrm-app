@@ -47,9 +47,11 @@
       </v-col>
     </template>
     <template v-else>
-      <h1>There are currently no items in the shoping cart.</h1>
-      <h2>Add a product from the catalog</h2>
-      <v-btn color="primary" nuxt to="/catalog"> Открыть каталог </v-btn>
+      <v-col align="center" v-spacer>
+        <h1>There are currently no items in the shoping cart.</h1>
+        <h2>Add a product from the catalog</h2>
+        <v-btn color="primary" nuxt to="/catalog"> Открыть каталог </v-btn>
+      </v-col>
     </template>
 
     <div>
@@ -76,20 +78,19 @@ export default {
     },
   },
   methods: {
-    createNewOrder() {
+    async createNewOrder() {
       const nOrder = {
-        id: this.$uuid.v4(),
+        id: '',
         state: 'Новый заказ',
         provider_id: '',
         provider_name: '',
         date: '01.10.2021',
-
+        total_count: this.cartInfo.count,
+        total_cost: this.cartInfo.cost,
         order_details: this.cartInfo.list,
-        total_count: this.cartInfo.list.length,
-        total_cost: 999,
       }
-      console.log(nOrder)
-      this.$store.dispatch('orders/addNewOrderToList', nOrder)
+      await this.$store.dispatch('orders/addNewOrderToList', nOrder)
+      await this.$store.dispatch('cart/emptyCart')
     },
   },
 }

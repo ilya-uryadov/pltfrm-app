@@ -50,7 +50,7 @@
         </thead>
         <tbody>
           <tr v-for="item in order.order_details" :key="item.name">
-            <td>{{ item.name }}</td>
+            <td>{{ item.title }}</td>
             <td class="text-right">{{ item.count }}</td>
             <td class="text-right">{{ item.price }}</td>
             <td class="text-right">{{ item.summ }}</td>
@@ -66,7 +66,8 @@ export default {
   computed: {
     order() {
       return this.$store.getters['orders/getOrdersByID'](
-        Number(this.$route.params.id)
+        // Number(this.$route.params.id)
+        this.$route.params.id
       )
     },
     status_class() {

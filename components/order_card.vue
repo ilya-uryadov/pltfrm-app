@@ -51,7 +51,7 @@
               </thead>
               <tbody>
                 <tr v-for="item in order.order_details" :key="item.name">
-                  <td>{{ item.name }}</td>
+                  <td>{{ item.title }}</td>
                   <td class="text-right">{{ item.count }}</td>
                   <td class="text-right">{{ item.price }}</td>
                   <td class="text-right">{{ item.summ }}</td>
