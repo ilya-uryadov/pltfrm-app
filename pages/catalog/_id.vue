@@ -49,7 +49,7 @@
     </v-row>
 
     <v-row>
-      <v-col v-for="good in goods" :key="good.id" cols="12">
+      <v-col v-for="good in goods" :key="good.id" md="6" lg="4" xl="3">
         <productcard :goodprop="good"></productcard>
       </v-col>
     </v-row>
