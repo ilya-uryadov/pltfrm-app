@@ -2,8 +2,8 @@
 
 export const state = () => ({
   st: 111112,
-
-  list: [
+  list: [],
+  list2: [
     {
       id: 1,
       group_id: 0,
@@ -104,20 +104,55 @@ export const state = () => ({
   ],
 })
 
-// export const mutations = {
-//   add(state, text) {
-//     state.list.push({
-//       text,
-//       done: false,
-//     })
-//   },
-//   remove(state, { todo }) {
-//     state.list.splice(state.list.indexOf(todo), 1)
-//   },
-//   toggle(state, todo) {
-//     todo.done = !todo.done
-//   },
-// }
+export const mutations = {
+  setUpdateCatalog(state, cat) {
+    state.list = state.list2.slice()
+  },
+
+  //   add(state, text) {
+  //     state.list.push({
+  //       text,
+  //       done: false,
+  //     })
+  //   },
+  //   remove(state, { todo }) {
+  //     state.list.splice(state.list.indexOf(todo), 1)
+  //   },
+  //   toggle(state, todo) {
+  //     todo.done = !todo.done
+  //   },
+}
+
+export const actions = {
+  updateCatalog(context) {
+    // const cat = this.list2
+    // await context.commit('setUpdateCatalog', state.list2)
+    const url = 'http://localhost:3001/api/catalog'
+    // const port = 3001
+    return new Promise((resolve, reject) => {
+      // const resp = await this.$axios.$get(url)
+
+      // return resp.data
+
+      // await this.$axios.$get({ url: url, method: 'GET', port: port })
+      this.$axios
+        .$get(url)
+        .then((resp) => {
+          console.log(resp)
+          context.commit('setUpdateCatalog', resp)
+          //       // console.log(resp.data)
+          //       const cat = resp.data
+          //       context.commit('setUpdateCatalog', cat)
+          resolve(resp)
+        })
+        .catch((err) => {
+          //       // commit('auth_error')
+          //       // localStorage.removeItem('token')
+          reject(err)
+        })
+    }).catch((e) => console.log(e.message))
+  },
+}
 
 export const getters = {
   getCatalogGroup:

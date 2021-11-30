@@ -38,5 +38,16 @@ export default {
       return this.$store.getters['catalog/getCatalogGroup'](0)
     },
   },
+
+  created() {
+    this.updateCatalog()
+  },
+  methods: {
+    async updateCatalog() {
+      // const res =
+      await this.$store.dispatch('catalog/updateCatalog')
+      console.log(this.$store.state.catalog.list)
+    },
+  },
 }
 </script>
