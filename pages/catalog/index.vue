@@ -12,13 +12,13 @@
       ></v-col>
     </v-row>
     <v-row>
-      <v-col v-for="card in groups" :key="card.id">
+      <v-col v-for="card in groups" :key="card._id">
         <v-card
           class="mx-auto"
           max-width="344"
           outlined
           nuxt
-          :to="`/catalog/${card.id}`"
+          :to="`/catalog/${card._id}`"
         >
           <v-card-title v-text="card.title"></v-card-title>
           <v-img height="344" max-width="344" :src="card.src"></v-img>
@@ -35,7 +35,7 @@
 export default {
   computed: {
     groups() {
-      return this.$store.getters['catalog/getCatalogGroup'](0)
+      return this.$store.getters['catalog/getCatalogGroup']('0')
     },
   },
 
@@ -46,7 +46,7 @@ export default {
     async updateCatalog() {
       // const res =
       await this.$store.dispatch('catalog/updateCatalog')
-      console.log(this.$store.state.catalog.list)
+      // console.log(this.$store.state.catalog.list)
     },
   },
 }

@@ -6,7 +6,7 @@ export const state = () => ({
   list2: [
     {
       id: 1,
-      group_id: 0,
+      group_id: '2',
       its_group: true,
       title: 'Алкогольные напитки',
       subtitle: 'Все виды алкогольных напитков разной крепкости',
@@ -15,7 +15,7 @@ export const state = () => ({
     },
     {
       id: 2,
-      group_id: 0,
+      group_id: '0',
       its_group: true,
       title: 'Овощи и фрукты',
       subtitle: '',
@@ -24,7 +24,7 @@ export const state = () => ({
     },
     {
       id: 3,
-      group_id: 0,
+      group_id: '0',
       its_group: true,
       title: 'Молочные продукты',
       subtitle: 'Молоко, творог, сметана, сыр, масло и яйца',
@@ -34,7 +34,7 @@ export const state = () => ({
 
     {
       id: 4,
-      group_id: 0,
+      group_id: '0',
       its_group: true,
       title: 'Бакалея',
       subtitle: 'Все виды круп и макарон',
@@ -43,7 +43,7 @@ export const state = () => ({
     },
     {
       id: 5,
-      group_id: 0,
+      group_id: '0',
       its_group: true,
       title: 'Кондитерские изделия',
       subtitle: 'Все виды сладостей',
@@ -106,7 +106,7 @@ export const state = () => ({
 
 export const mutations = {
   setUpdateCatalog(state, cat) {
-    state.list = state.list2.slice()
+    state.list = cat.slice()
   },
 
   //   add(state, text) {
@@ -131,18 +131,17 @@ export const actions = {
     // const port = 3001
     return new Promise((resolve, reject) => {
       // const resp = await this.$axios.$get(url)
-
       // return resp.data
-
       // await this.$axios.$get({ url: url, method: 'GET', port: port })
       this.$axios
         .$get(url)
         .then((resp) => {
-          console.log(resp)
+          // console.log(resp)
           context.commit('setUpdateCatalog', resp)
           //       // console.log(resp.data)
           //       const cat = resp.data
           //       context.commit('setUpdateCatalog', cat)
+          // console.log(context)
           resolve(resp)
         })
         .catch((err) => {
@@ -157,14 +156,14 @@ export const actions = {
 export const getters = {
   getCatalogGroup:
     (state) =>
-    (id = 0) => {
+    (id = '0') => {
       return state.list.filter(
         (group) => group.group_id === id && group.its_group
       )
     },
   getCatalogGoods:
     (state) =>
-    (id = 0) => {
+    (id = '0') => {
       return state.list.filter(
         (good) => good.group_id === id && !good.its_group
       )
