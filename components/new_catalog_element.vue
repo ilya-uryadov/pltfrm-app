@@ -3,11 +3,21 @@
     <v-card class="mx-auto my-12" max-width="374" outlined nuxt>
       <v-col>perents_group = {{ perentsgroup }}</v-col>
       <v-card-actions>
-        <v-btn class="mx-2" dark color="primary">
+        <v-btn
+          class="mx-2"
+          dark
+          color="primary"
+          :to="`/add_new_good/?perentsgroup=${perentsgroup}&group=1`"
+        >
           <v-icon dark> mdi-plus </v-icon>
           Add new group
         </v-btn>
-        <v-btn class="mx-2" dark color="primary">
+        <v-btn
+          class="mx-2"
+          dark
+          color="primary"
+          :to="`/add_new_good/?perentsgroup=${perentsgroup}&group=0`"
+        >
           <v-icon dark> mdi-plus </v-icon>
           Add new good
         </v-btn>
