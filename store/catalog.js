@@ -175,13 +175,13 @@ export const getters = {
   getGroupName:
     (state) =>
     (id = 1) => {
-      return state.list.filter((group) => group.id === id)[0].title
+      return state.list.filter((group) => group._id === id)[0].title
     },
   getParentGroupId:
     (state) =>
     (id = 1) => {
-      const pId = state.list.filter((group) => group.id === id)[0].group_id
-      if (pId !== 0) {
+      const pId = state.list.filter((group) => group._id === id)[0].group_id
+      if (pId !== '0') {
         return pId
       } else {
         return ''
@@ -190,9 +190,9 @@ export const getters = {
   getParentGroupName:
     (state) =>
     (id = 1) => {
-      const pId = state.list.filter((group) => group.id === id)[0].group_id
-      if (pId !== 0) {
-        return state.list.filter((group) => group.id === pId)[0].title
+      const pId = state.list.filter((group) => group._id === id)[0].group_id
+      if (pId !== '0') {
+        return state.list.filter((group) => group._id === pId)[0].title
       } else {
         return 'Каталог'
       }

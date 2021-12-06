@@ -25,14 +25,18 @@
           <v-card-subtitle v-text="card.subtitle"></v-card-subtitle>
         </v-card>
       </v-col>
+      <newelement :perentsgroup="'0'"></newelement>
     </v-row>
   </v-container>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import newelement from '~/components/new_catalog_element.vue'
 
 export default {
+  components: {
+    newelement,
+  },
   computed: {
     groups() {
       return this.$store.getters['catalog/getCatalogGroup']('0')
