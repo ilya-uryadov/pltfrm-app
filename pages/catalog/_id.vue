@@ -52,35 +52,36 @@
       <v-col v-for="good in goods" :key="good.id" md="6" lg="4" xl="3">
         <productcard :goodprop="good"></productcard>
       </v-col>
+      <newelement :perentsgroup="this.$route.params.id"></newelement>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import newelement from '~/components/new_catalog_element.vue'
 import productcard from '~/components/product_card.vue'
 export default {
   components: {
     productcard,
+    newelement,
   },
   computed: {
     groups() {
       return this.$store.getters['catalog/getCatalogGroup'](
-        Number(this.$route.params.id)
+        this.$route.params.id
       )
     },
     groupName() {
-      return this.$store.getters['catalog/getGroupName'](
-        Number(this.$route.params.id)
-      )
+      return this.$store.getters['catalog/getGroupName'](this.$route.params.id)
     },
     parentGroupId() {
       return this.$store.getters['catalog/getParentGroupId'](
-        Number(this.$route.params.id)
+        this.$route.params.id
       )
     },
     parentGroupName() {
       return this.$store.getters['catalog/getParentGroupName'](
-        Number(this.$route.params.id)
+        this.$route.params.id
       )
     },
     parentGrouplink() {
